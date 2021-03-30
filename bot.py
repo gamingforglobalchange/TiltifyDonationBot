@@ -58,7 +58,7 @@ def init_tiltify_api_call():
     # I've decided on 6s (6000ms) because it covers two edge cases: a) donation received 1ms after 5000ms check, b) local clock inaccuracy up to 1001ms.
     # If you have an idea how to streamline this into one check while still covering these edge cases, open an issue or pull request with your suggestion!
     for x in reversed(tiltify_recent_donation_data):       
-        if x['id'] not in tiltify_latest_saved_donation_ids and current_timestamp - x['completedAt']/1000 < 90000:
+        if x['id'] not in tiltify_latest_saved_donation_ids and current_timestamp - x['completedAt']/1000 < 6000:
             tiltify_latest_saved_donation_ids.append(x['id'])
             
             formatted_donation_total = str("${:,.2f}".format(int(x['amount'])))
