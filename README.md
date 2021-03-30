@@ -19,3 +19,10 @@ Then, clone this repository, open `bot.py`, and change the necessary variables t
 - `twitch_oauth_token`: Can be easily obtained by logging in with your Twitch account [here.](https://twitchapps.com/tmi/) 
 
 Save your changes. Finally, run the bot with `python bot.py` or `python3 bot.py` and you should be up and running!
+
+## Limitations
+This bot was developed with edge cases in mind, however there are still some extreme situations to consider. Since the bot relies on calling external APIs, it may be subject to any rate limiting done on the part of the API maintainers. 
+
+The Tiltify API is only called every 5 seconds by default - you can change this if you wish, but you are the only one responsible if you get blacklisted. Twitch's API rate limits are very generous at 800 calls per minute, meaning you can effectively get 800 donations per minute before getting limited. This should be more than enough for practically every use case, however please keep this in mind if you are using this for an extremely high volume fundraiser.
+
+For now, one of the checks to see if there are any new donations relies on the clock of the system the bot is running on. There is a generous 1000ms tolerance for any slight inaccuracies involved, but this is nonetheless still a potential point of failure if you are dealing with a system with significant clock inaccuracy issues.
