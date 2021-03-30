@@ -55,10 +55,10 @@ def init_tiltify_api_call():
     current_timestamp = time.time()
 
     # Making sure we don't send duplicates in chat: one is storage-based (main check), the other is timestamp-based (prevents double-sending upon initial run).
-    # I've decided on 6s (6000ms) because it covers two edge cases: a) donation received 1ms after 5000ms check, b) local clock inaccuracy up to 1001ms.
+    # I've decided on 6s (technically 5.999s) because it covers two edge cases: a) donation received 1ms after 5000ms check, b) local clock inaccuracy up to 1000ms.
     # If you have an idea how to streamline this into one check while still covering these edge cases, open an issue or pull request with your suggestion!
     for x in reversed(tiltify_recent_donation_data):       
-        if x['id'] not in tiltify_latest_saved_donation_ids and current_timestamp - x['completedAt']/1000 < 6000:
+        if x['id'] not in tiltify_latest_saved_donation_ids and current_timestamp - x['completedAt']/1000 < 6:
             tiltify_latest_saved_donation_ids.append(x['id'])
             
             formatted_donation_total = str("${:,.2f}".format(int(x['amount'])))
