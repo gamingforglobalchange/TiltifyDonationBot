@@ -4,7 +4,7 @@ import requests
 from twitchio.ext import commands
 import time
 
-tiltify_auth_token = "TILTIFY AUTH TOKEN HERE"
+tiltify_access_token = "TILTIFY ACCESS TOKEN HERE"
 tiltify_username = "TILTIFY USERNAME HERE" # Username must be in all lowercase!
 tiltify_campaign_slug = "TILTIFY CAMPAIGN SLUG HERE" # Campaign slug must be in all lowercase!
 
@@ -42,13 +42,13 @@ def init_tiltify_api_call():
 
     # Grab campaign ID from campaign slug and Tiltify user.
     api_endpoint = f"https://tiltify.com/api/v3/users/{tiltify_username}/campaigns/{tiltify_campaign_slug}"
-    head = {'Authorization': 'Bearer ' + tiltify_auth_token}
+    head = {'Authorization': 'Bearer ' + tiltify_access_token}
     r = requests.get(url = api_endpoint, headers = head)
     tiltify_campaign_id = str(r.json()['data']['id'])
 
     # Grab donations from campaign ID.
     api_endpoint = f"https://tiltify.com/api/v3/campaigns/{tiltify_campaign_id}/donations"
-    head = {'Authorization': 'Bearer ' + tiltify_auth_token}
+    head = {'Authorization': 'Bearer ' + tiltify_access_token}
     r = requests.get(url = api_endpoint, headers = head)
 
     tiltify_recent_donation_data = r.json()['data']
