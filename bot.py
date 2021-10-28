@@ -8,23 +8,28 @@ tiltify_access_token = "TILTIFY ACCESS TOKEN HERE"
 tiltify_username = "TILTIFY USERNAME HERE"
 tiltify_campaign_slug = "TILTIFY CAMPAIGN SLUG HERE"
 
-twitch_channel_name = "TWITCH CHANNEL NAME HERE" # This is the channel name of where you want to send the alerts to.
+twitch_channel_names = ["TWITCH CHANNEL NAME HERE"] # This is the list of channel names of where you want to send the alerts to.
 twitch_bot_username = "TWITCH BOT USERNAME HERE" # This is the channel name of the bot account sending the alerts.
 twitch_client_id = "TWITCH CLIENT ID HERE"
 twitch_oauth_token = "TWITCH OAUTH TOKEN HERE"
 
 #  Twitch bot class
-channel = None
+channels = None
 message_list = []
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(client_id=twitch_client_id, token=twitch_oauth_token, nick=twitch_bot_username, prefix='!', initial_channels=[twitch_channel_name])
+        super().__init__(
+            client_id=twitch_client_id,
+            token=twitch_oauth_token,
+            nick=twitch_bot_username, prefix='!',
+            initial_channels=twitch_channel_names
+        )
         self.loop.create_task(self.process_tiltify_api_call())
 
     async def event_ready(self):
-        global channel
-        channel = self.get_channel(twitch_channel_name)
+        global channels
+        channels = list(map( lambda c : self.get_channel(c), twitch_channel_names ))
         print ("Bot ready.")
 
     async def process_tiltify_api_call(self):
@@ -32,8 +37,9 @@ class Bot(commands.Bot):
             await asyncio.sleep(5)
             if init_tiltify_api_call():
                 # Please note that this will send all messages in the list at once. Twitch's v5 API has a rate limit of 800 requests per minute (with OAuth).
-                for x in message_list:         
-                    await channel.send(x)
+                for message in message_list:
+                    for channel in channels:
+                        await channel.send(message)
 
 # Tiltify API calls
 tiltify_latest_saved_donation_ids = []
