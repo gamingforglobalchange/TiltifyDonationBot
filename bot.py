@@ -19,7 +19,7 @@ message_list = []
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(client_id=twitch_client_id, irc_token=twitch_oauth_token, nick=twitch_bot_username, prefix='!', initial_channels=[twitch_channel_name])
+        super().__init__(client_id=twitch_client_id, token=twitch_oauth_token, nick=twitch_bot_username, prefix='!', initial_channels=[twitch_channel_name])
         self.loop.create_task(self.process_tiltify_api_call())
 
     async def event_ready(self):
