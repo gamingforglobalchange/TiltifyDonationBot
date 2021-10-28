@@ -5,8 +5,8 @@ from twitchio.ext import commands
 import time
 
 tiltify_access_token = "TILTIFY ACCESS TOKEN HERE"
-tiltify_username = "TILTIFY USERNAME HERE" # Username must be in all lowercase!
-tiltify_campaign_slug = "TILTIFY CAMPAIGN SLUG HERE" # Campaign slug must be in all lowercase!
+tiltify_username = "TILTIFY USERNAME HERE"
+tiltify_campaign_slug = "TILTIFY CAMPAIGN SLUG HERE"
 
 twitch_channel_name = "TWITCH CHANNEL NAME HERE" # This is the channel name of where you want to send the alerts to.
 twitch_bot_username = "TWITCH BOT USERNAME HERE" # This is the channel name of the bot account sending the alerts.
@@ -41,7 +41,7 @@ def init_tiltify_api_call():
     global message_list, tiltify_latest_saved_donation_ids
 
     # Grab campaign ID from campaign slug and Tiltify user.
-    api_endpoint = f"https://tiltify.com/api/v3/users/{tiltify_username}/campaigns/{tiltify_campaign_slug}"
+    api_endpoint = f"https://tiltify.com/api/v3/users/{tiltify_username.lower()}/campaigns/{tiltify_campaign_slug.lower()}"
     head = {'Authorization': 'Bearer ' + tiltify_access_token}
     r = requests.get(url = api_endpoint, headers = head)
     tiltify_campaign_id = str(r.json()['data']['id'])
