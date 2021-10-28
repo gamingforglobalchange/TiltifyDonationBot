@@ -8,7 +8,7 @@ tiltify_access_token = "TILTIFY ACCESS TOKEN HERE"
 tiltify_username = "TILTIFY USERNAME HERE"
 tiltify_campaign_slug = "TILTIFY CAMPAIGN SLUG HERE"
 
-twitch_channel_names = ["TWITCH CHANNEL NAME HERE"] # This is the list of channel names of where you want to send the alerts to.
+twitch_channel_names = ["TWITCH CHANNEL NAME HERE"] # This is the list of channel names where you want to send the alerts to.
 twitch_bot_username = "TWITCH BOT USERNAME HERE" # This is the channel name of the bot account sending the alerts.
 twitch_client_id = "TWITCH CLIENT ID HERE"
 twitch_oauth_token = "TWITCH OAUTH TOKEN HERE"
@@ -29,7 +29,7 @@ class Bot(commands.Bot):
 
     async def event_ready(self):
         global channels
-        channels = list(map( lambda c : self.get_channel(c), twitch_channel_names ))
+        channels = list(map(lambda c : self.get_channel(c), twitch_channel_names))
         print ("Bot ready.")
 
     async def process_tiltify_api_call(self):
