@@ -71,7 +71,7 @@ def init_tiltify_api_call():
             message = f"We have a {formatted_donation_total} donation from {donation['name']}"
 
             # Only say there's a comment if there actually is one
-            if donation['comment'] != "":
+            if donation['comment'] != "None":
                 message += f" with the comment \"{donation['comment']}\""
 
             message_list.append(message)
