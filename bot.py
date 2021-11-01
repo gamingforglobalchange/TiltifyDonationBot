@@ -67,7 +67,7 @@ def init_tiltify_api_call():
         if donation['id'] not in tiltify_latest_saved_donation_ids and current_timestamp - donation['completedAt']/1000 < 6:
             tiltify_latest_saved_donation_ids.append(donation['id'])
             
-            formatted_donation_total = str("${:,.2f}".format(int(donation['amount'])))
+            formatted_donation_total = str("${:,.2f}".format(donation['amount']))
             message = f"We have a {formatted_donation_total} donation from {donation['name']}"
 
             # Only say there's a comment if there actually is one
