@@ -6,7 +6,7 @@ A bot that sends a message in Twitch chat when a new Tiltify donation is detecte
 ## Installation
 **Note: TiltifyDonationBot requires Python 3.7 or higher.**
 
-First, clone this repository, move to the directory created, and install all dependencies by running `python -m pip install -r requirements.txt` or `python3 -m pip install -r requirements.txt` (Python 2 may be pre-installed on some systems as `python` - check what version you have with `python -V`).
+First, clone this repository, move to the directory created, and install all dependencies by running `python -m pip install -r requirements.txt` or `python3 -m pip install -r requirements.txt` (an older version of Python may be pre-installed on some systems as `python` - check what version you have with `python -V`).
 
 Then, open `bot.py`, and change the necessary variables to your credentials. Here's what you need:
 
